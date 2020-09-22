@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { Alert, Button, StyleSheet, TextInput, ScrollView, ActivityIndicator, View } from 'react-native';
+import { Alert, Button, StyleSheet, ScrollView, ActivityIndicator, View, Text} from 'react-native';
 import firebase from '../database/firebaseDb';
+import { TextInput } from 'react-native-paper';
 
+
+
+//Screen donde se editan o eliminan los usuarios.
 class UserDetailScreen extends Component {
 
   constructor() {
@@ -27,7 +31,7 @@ class UserDetailScreen extends Component {
           isLoading: false
         });
       } else {
-        console.log("Document does not exist!");
+        console.log("El documennto NO existe!");
       }
     });
   }
@@ -68,18 +72,18 @@ class UserDetailScreen extends Component {
   deleteUser() {
     const dbRef = firebase.firestore().collection('users').doc(this.props.route.params.userkey)
       dbRef.delete().then((res) => {
-          console.log('Item removed from database')
+          console.log('El contacto fue eliminado de la base de datos')
           this.props.navigation.navigate('UserScreen');
       })
   }
 
   openTwoButtonAlert=()=>{
     Alert.alert(
-      'Delete User',
-      'Are you sure?',
+      'Eliminar contacto',
+      '¿Estás seguro?',
       [
-        {text: 'Yes', onPress: () => this.deleteUser()},
-        {text: 'No', onPress: () => console.log('No item was removed'), style: 'cancel'},
+        {text: 'Si', onPress: () => this.deleteUser()},
+        {text: 'No', onPress: () => console.log('Ningún contacto fue eliminado'), style: 'cancel'},
       ],
       { 
         cancelable: true 
@@ -97,6 +101,11 @@ class UserDetailScreen extends Component {
     }
     return (
       <ScrollView style={styles.container}>
+        <Text style={{fontSize:40, fontWeight: "bold" }}> Recuerda...</Text>
+          <Text></Text>
+        <Text style={{fontSize:25, fontWeight: "normal", alignSelf: "center"}}> Puedes actualizar o eliminar este contacto</Text>
+        <Text></Text>
+        <Text></Text>
         <View style={styles.inputGroup}>
           <TextInput
               placeholder={'Name'}
@@ -107,7 +116,7 @@ class UserDetailScreen extends Component {
         <View style={styles.inputGroup}>
           <TextInput
               multiline={true}
-              numberOfLines={4}
+              numberOfLines={1}
               placeholder={'Email'}
               value={this.state.email}
               onChangeText={(val) => this.inputValueUpdate(val, 'email')}
@@ -122,14 +131,14 @@ class UserDetailScreen extends Component {
         </View>
         <View style={styles.button}>
           <Button
-            title='Update'
+            title='Actualizar'
             onPress={() => this.updateUser()} 
             color="#19AC52"
           />
           </View>
          <View>
           <Button
-            title='Delete'
+            title='Eliminar'
             onPress={this.openTwoButtonAlert}
             color="#E37399"
           />

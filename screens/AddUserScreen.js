@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, TextInput, ScrollView, ActivityIndicator, View } from 'react-native';
+import { Button, Text, StyleSheet,  ScrollView, ActivityIndicator, View } from 'react-native';
 import firebase from '../database/firebaseDb';
+import { TextInput } from 'react-native-paper';
 
+
+
+//Screen donde se agregan los usuarios.
 class AddUserScreen extends Component {
   constructor() {
     super();
@@ -14,12 +18,14 @@ class AddUserScreen extends Component {
     };
   }
 
+  //actualiza el valor ingresado por el usuario
   inputValueUpdate = (val, prop) => {
     const state = this.state;
     state[prop] = val;
     this.setState(state);
   }
 
+  //almacena un usuario en la db y navega hacia lista de usuarios.
   storeUser() {
     if(this.state.name === ''){
      alert('Fill at least your name!')
@@ -59,9 +65,16 @@ class AddUserScreen extends Component {
     }
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.inputGroup}>
+        <Text style={{fontSize:40, fontWeight: "bold", alignSelf: "center" }}> Hola!</Text>
+        <Text></Text>
+        <Text style={{fontSize:25, fontWeight: "normal", alignSelf: "center"}}> ¿Qué quieres hacer?</Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+          <View style={styles.inputGroup}>
+
           <TextInput
-              placeholder={'Name'}
+              placeholder={'Nombre'}
               value={this.state.name}
               onChangeText={(val) => this.inputValueUpdate(val, 'name')}
           />
@@ -69,29 +82,32 @@ class AddUserScreen extends Component {
         <View style={styles.inputGroup}>
           <TextInput
               multiline={true}
-              numberOfLines={4}
-              placeholder={'Email'}
+              numberOfLines={1}
+              placeholder={'E-mail'}
               value={this.state.email}
               onChangeText={(val) => this.inputValueUpdate(val, 'email')}
           />
         </View>
         <View style={styles.inputGroup}>
           <TextInput
-              placeholder={'Mobile'}
+              placeholder={'Teléfono'}
               value={this.state.mobile}
               onChangeText={(val) => this.inputValueUpdate(val, 'mobile')}
           />
         </View>
         <View style={styles.button}>
           <Button
-            title='Add User'
+            title='Agregar contacto'
             onPress={() => this.storeUser()} 
             color="#19AC52"
+            
           />
         </View>
+        <Text></Text>
+        
         <View style={styles.button}>
           <Button
-            title='User List'
+            title='Ver lista de contactos'
             onPress={() => this.props.navigation.navigate('UserScreen')} 
             color="#19AC52"
           />

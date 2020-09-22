@@ -23,17 +23,17 @@ function MyStack() {
       <Stack.Screen 
         name="AddUserScreen" 
         component={AddUserScreen} 
-        options={{ title: 'Add User' }}
+        options={{ title: 'Agrega un contacto' }}
       />
       <Stack.Screen 
         name="UserScreen" 
         component={UserScreen} 
-        options={{ title: 'Users List' }}
+        options={{ title: 'Lista de contactos' }}
       />
       <Stack.Screen 
        name="UserDetailScreen" 
        component={UserDetailScreen} 
-       options={{ title: 'User Detail' }}
+       options={{ title: 'Detalles del contacto' }}
       />
     </Stack.Navigator>
   );

@@ -1,10 +1,9 @@
-// screens/UserScreen.js
-
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, ActivityIndicator, View } from 'react-native';
 import { ListItem } from 'react-native-elements'
 import firebase from '../database/firebaseDb';
 
+//Screen donde se visualizan los usuarios previamente agregados.
 class UserScreen extends Component {
 
   constructor() {
